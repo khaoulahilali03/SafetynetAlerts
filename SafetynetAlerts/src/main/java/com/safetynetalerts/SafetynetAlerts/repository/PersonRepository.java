@@ -20,8 +20,11 @@ public class PersonRepository {
     }
 
     // This method return the list of persons in the Json file
-    public List<Person> findAll(){return personList;}
+    public List<Person> findAll(){
+        return personList;
+    }
 
+    // This method return a person by given her firstname and lastname
     public Person findByName(String firstName, String lastName){
         for (Person person : personList){
             if ((person.getFirstName().equals(firstName)) && (person.getLastName().equals(lastName))){
