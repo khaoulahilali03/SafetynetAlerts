@@ -23,7 +23,7 @@ public class FireStationRepository {
         return fireStationList;
     }
 
-    // This method return a firestation by given her address
+    // This method return a firestation by given address
     public FireStation findByAddress(String address){
         for (FireStation fireStation : fireStationList){
             if (fireStation.getAddress().equals(address)){

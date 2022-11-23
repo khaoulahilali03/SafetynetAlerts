@@ -24,7 +24,7 @@ public class PersonRepository {
         return personList;
     }
 
-    // This method return a person by given her firstname and lastname
+    // This method return a person by given firstname and lastname
     public Person findByName(String firstName, String lastName){
         for (Person person : personList){
             if ((person.getFirstName().equals(firstName)) && (person.getLastName().equals(lastName))){
