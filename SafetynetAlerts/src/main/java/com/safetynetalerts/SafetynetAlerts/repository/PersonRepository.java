@@ -89,6 +89,17 @@ public class PersonRepository {
         }return personList;
     }
 
+    //localhost:8080/communityemail?city=<city>
+    // This method return a list of emails of all the person who living in a city
+    public List<String> getAllEmailsByCity(String city){
+        List<String> emails = new ArrayList<>();
+        for (Person person: this.getAllPersons()){
+            if (person.getCity().equals(city)){
+                emails.add(person.getEmail());
+            }
+        }return emails;
+    }
+
 
 
 }

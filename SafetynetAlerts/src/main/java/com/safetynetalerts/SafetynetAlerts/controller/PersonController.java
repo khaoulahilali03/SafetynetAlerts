@@ -69,4 +69,11 @@ public class PersonController {
     public List<Person> deletePerson(@PathVariable ("firstname") String firstName, @PathVariable("lastname") String lastName){
         return personService.deletePerson(firstName,lastName);
     }
+
+    //localhost:8080/communityemail?city=<city>
+    @GetMapping("communityemail")
+    public List<String> getAllEmailsByCity(@RequestParam ("city")String city) {
+        List<String> emails = personService.getAllEmailsByCity(city);
+        return emails;
+    }
 }

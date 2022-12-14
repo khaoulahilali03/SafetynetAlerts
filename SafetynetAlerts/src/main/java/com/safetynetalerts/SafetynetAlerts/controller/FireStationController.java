@@ -1,6 +1,5 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
-import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredBySpecificFireStation;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
 import org.springframework.web.bind.annotation.*;

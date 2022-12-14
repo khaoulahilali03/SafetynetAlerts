@@ -1,14 +1,10 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
-import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredBySpecificFireStation;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
-import com.safetynetalerts.SafetynetAlerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

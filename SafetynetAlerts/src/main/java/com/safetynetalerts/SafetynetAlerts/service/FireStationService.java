@@ -1,9 +1,7 @@
 package com.safetynetalerts.SafetynetAlerts.service;
 
-import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredBySpecificFireStation;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.repository.FireStationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

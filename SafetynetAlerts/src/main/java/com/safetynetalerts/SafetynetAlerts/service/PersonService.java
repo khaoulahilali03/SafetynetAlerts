@@ -44,5 +44,7 @@ public class PersonService {
         return personRepository.deletePerson(firstName,lastName);
     }
 
-
+    public List<String> getAllEmailsByCity(String city) {
+        return personRepository.getAllEmailsByCity(city);
+    }
 }
