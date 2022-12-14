@@ -51,6 +51,9 @@ public class DataStore {
         String fileName = "D:/OPC/Formation_Java/P5/SafetynetAlerts/SafetynetAlerts/src/main/resources/data.json";
         ObjectMapper mapper = new ObjectMapper();
         DataStore store = mapper.readValue(Paths.get(fileName).toFile(), DataStore.class);
+        persons = store.getPersons();
+        firestations = store.getFirestations();
+        medicalrecords = store.getMedicalrecords();
         return store;
     }
 

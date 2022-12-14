@@ -3,6 +3,7 @@ package com.safetynetalerts.SafetynetAlerts.controller;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.repository.MedicalRecordRepository;
 import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,24 +11,24 @@ import java.util.List;
 @RestController
 public class MedicalRecordController {
     private MedicalRecordService medicalRecordService;
-
+    @Autowired
     public MedicalRecordController(MedicalRecordService medicalRecordService) {
         this.medicalRecordService = medicalRecordService;
     }
 
     @GetMapping("medicalrecord")
-    public List<MedicalRecord> findAll(){
-        return medicalRecordService.findAll();
+    public List<MedicalRecord> getAllMedicalRecords(){
+        return medicalRecordService.getAllMedicalRecords();
     }
 
     @PostMapping("medicalrecord")
     public List<MedicalRecord> createMedicalRecord(@RequestBody MedicalRecord medicalRecord){
-        return medicalRecordService.addMedicalRecord(medicalRecord);
+        return medicalRecordService.createMedicalRecord(medicalRecord);
     }
 
     @PutMapping("medicalrecord/{firstname}/{lastname}")
     public List<MedicalRecord> updateMedicalRecord(@PathVariable("firstname") String firstName, @PathVariable("lastname") String lastName, @RequestBody MedicalRecord medicalRecord){
-        MedicalRecord currentMedicalRecord = medicalRecordService.findByName(firstName,lastName);
+        MedicalRecord currentMedicalRecord = medicalRecordService.findMedicalRecordByName(firstName,lastName);
         if (currentMedicalRecord != null){
 
             String birthdate = medicalRecord.getBirthdate();
@@ -46,7 +47,7 @@ public class MedicalRecordController {
             }
 
             medicalRecordService.updateMedicalRecord(currentMedicalRecord);
-            return medicalRecordService.addMedicalRecord(currentMedicalRecord);
+            return medicalRecordService.createMedicalRecord(currentMedicalRecord);
         }else {
             return null;
         }

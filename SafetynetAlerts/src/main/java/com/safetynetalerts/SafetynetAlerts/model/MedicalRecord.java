@@ -1,5 +1,8 @@
 package com.safetynetalerts.SafetynetAlerts.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MedicalRecord {
@@ -70,5 +73,13 @@ public class MedicalRecord {
                 ", medications=" + medications +
                 ", allergies=" + allergies +
                 '}';
+    }
+
+    public Integer getAge(){
+        DateTimeFormatter dateTimeFormatter =DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate birth = LocalDate.parse(this.birthdate,dateTimeFormatter);
+        if (this.birthdate != null){
+            return Period.between(birth,LocalDate.now()).getYears();
+        }return 0;
     }
 }

@@ -17,26 +17,32 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public PersonService() {
+    public List<Person> getAllPersons(){
+
+        return personRepository.getAllPersons();
     }
 
-    public List<Person> findAll(){
-        return personRepository.findAll();
+    public Person findPersonByName(String firstName, String lastName){
+        return personRepository.findPersonByName(firstName,lastName);
     }
 
-    public Person findByName(String firstName, String lastName){
-        return personRepository.findByName(firstName,lastName);
+    public List<Person> findPersonByAddress(String address){
+        return personRepository.findPersonByAddress(address);
     }
 
-    public List<Person> addPerson(Person person){
+    public List<Person> createPerson(Person person){
+
         return personRepository.addPerson(person);
     }
 
     public Person updatePerson(Person person){
-        return personRepository.updatePerson(person);
+
+        return personRepository.savePerson(person);
     }
 
     public List<Person> deletePerson(String firstName, String lastName){
         return personRepository.deletePerson(firstName,lastName);
     }
+
+
 }

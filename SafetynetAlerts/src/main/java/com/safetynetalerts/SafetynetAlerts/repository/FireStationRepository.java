@@ -1,30 +1,39 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredBySpecificFireStation;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
+import com.safetynetalerts.SafetynetAlerts.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class FireStationRepository {
-    String fileName = "D:/OPC/Formation_Java/P5/SafetynetAlerts/SafetynetAlerts/src/main/resources/data.json";
-    ObjectMapper mapper = new ObjectMapper();
-    DataStore store = mapper.readValue(Paths.get(fileName).toFile(), DataStore.class);
-    List<FireStation> fireStationList = store.getFirestations();
+    @Autowired
+    DataStore dataStore;
+    PersonRepository personRepository;
+    MedicalRecordRepository medicalRecordRepository;
 
-    public FireStationRepository() throws IOException {
+    public FireStationRepository(DataStore dataStore, PersonRepository personRepository, MedicalRecordRepository medicalRecordRepository) {
+        this.dataStore = dataStore;
+        this.personRepository = personRepository;
+        this.medicalRecordRepository = medicalRecordRepository;
     }
+
     // This method return the list of firestation in the Json file
-    public List<FireStation> findAll(){
-        return fireStationList;
+    public List<FireStation> getAllFireStations(){
+        return dataStore.getFirestations();
     }
 
     // This method return a firestation by given address
-    public FireStation findByAddress(String address){
+    public FireStation findFireStationByAddress(String address){
+        List<FireStation> fireStationList = this.getAllFireStations();
         for (FireStation fireStation : fireStationList){
             if (fireStation.getAddress().equals(address)){
                 return fireStation;
@@ -32,14 +41,32 @@ public class FireStationRepository {
         }return null;
     }
 
+    // This method returna firestation by a given station number
+    public FireStation findFirestationByNumberStation(String numberStation){
+        List<FireStation> fireStationList = this.getAllFireStations();
+        for (FireStation fireStation : fireStationList){
+            if (fireStation.getStation().equals(numberStation))
+                return fireStation;
+        }return null;
+    }
+
+    // This method return a set of all the addresses of the firestation in the json path
+    public Set<String> findAllAddresses(Set<FireStation> stationsNumber){
+        Set<String> addresses = new HashSet<>();
+        for (FireStation fireStation : this.getAllFireStations()){
+            addresses.add(fireStation.getAddress());
+        }return addresses;
+    }
+
     //This method allows to add a new firestation to the list of firestations
     public List<FireStation> addFireStation(FireStation fireStation){
+        List<FireStation> fireStationList = this.getAllFireStations();
         fireStationList.add(fireStation);
         return fireStationList;
     }
 
     // This method allows to update the informations of a fireStation
-    public FireStation updateFireStation (FireStation fireStation){
+    public FireStation saveFireStation (FireStation fireStation){
         String station = fireStation.getStation();
         fireStation.setStation(station);
         if (fireStation.getStation().equals(station)){
@@ -51,11 +78,14 @@ public class FireStationRepository {
 
     // This method allows to delete a firestation from a list of firestation
     public List<FireStation> deleteFireStation(String address){
+        List<FireStation> fireStationList = this.getAllFireStations();
         for (FireStation fireStation : fireStationList){
             if (fireStation.getAddress().equals(address)){
                 fireStationList.remove(fireStation);
             }
         }return fireStationList;
     }
+
+
 
 }

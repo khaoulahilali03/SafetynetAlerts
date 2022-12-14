@@ -19,18 +19,18 @@ public class PersonController {
     }
 
     @GetMapping("person")
-    public List<Person> personList(){
-        return personService.findAll();
+    public List<Person> getAllPersons(){
+        return personService.getAllPersons();
     }
 
     @PostMapping("person")
     public List<Person> createPerson(@RequestBody Person person){
-        return personService.addPerson(person);
+        return personService.createPerson(person);
     }
 
     @PutMapping("person/{firstname}/{lastname}")
     public List<Person> updatePerson(@PathVariable("firstname") final String firstName, @PathVariable("lastname") final String lastName, @RequestBody Person person){
-        Person currentPerson = personService.findByName(firstName,lastName);
+        Person currentPerson = personService.findPersonByName(firstName,lastName);
         if (currentPerson != null){
 
             String address = person.getAddress();
@@ -59,7 +59,7 @@ public class PersonController {
             }
 
             personService.updatePerson(currentPerson);
-            return personService.addPerson(currentPerson);
+            return personService.createPerson(currentPerson);
         }else {
             return null;
         }

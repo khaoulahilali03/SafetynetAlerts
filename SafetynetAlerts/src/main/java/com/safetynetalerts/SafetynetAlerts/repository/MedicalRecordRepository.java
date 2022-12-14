@@ -3,6 +3,8 @@ package com.safetynetalerts.SafetynetAlerts.repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -11,20 +13,24 @@ import java.util.List;
 @Repository
 public class MedicalRecordRepository {
 
-    String fileName = "D:/OPC/Formation_Java/P5/SafetynetAlerts/SafetynetAlerts/src/main/resources/data.json";
-    ObjectMapper mapper = new ObjectMapper();
-    DataStore store = mapper.readValue(Paths.get(fileName).toFile(),DataStore.class);
-    List<MedicalRecord> medicalRecordList = store.getMedicalrecords();
+    DataStore dataStore;
+    PersonRepository personRepository;
 
-    public MedicalRecordRepository() throws IOException {
+    @Autowired
+    @Lazy
+    public MedicalRecordRepository(DataStore dataStore, PersonRepository personRepository) {
+        this.dataStore = dataStore;
+        this.personRepository = personRepository;
     }
+
     // This method return the list of medicalrecord in the Json file
-    public List<MedicalRecord> findAll(){
-        return medicalRecordList;
+    public List<MedicalRecord> getAllMedicalRecords(){
+        return dataStore.getMedicalrecords();
     }
 
     // This method return a medicalrecord by given firstname and lastname
-    public MedicalRecord findByName(String firstName, String lastName){
+    public MedicalRecord findMedicalRecordByName(String firstName, String lastName){
+        List<MedicalRecord> medicalRecordList = this.getAllMedicalRecords();
         for (MedicalRecord medicalRecord : medicalRecordList){
             if ((medicalRecord.getFirstName().equals(firstName)) && (medicalRecord.getLastName().equals(lastName))){
                 return medicalRecord;
@@ -33,12 +39,13 @@ public class MedicalRecordRepository {
     }
     // This method allows to add a new medicalrecord to the list of persons
     public List<MedicalRecord> addMedicalRecord(MedicalRecord medicalRecord){
+        List<MedicalRecord> medicalRecordList= this.getAllMedicalRecords();
         medicalRecordList.add(medicalRecord);
         return medicalRecordList;
     }
 
     // This method allows to update the informations of a medicalrecord
-    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord){
+    public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord){
         String birthdate = medicalRecord.getBirthdate();
         medicalRecord.setBirthdate(birthdate);
 
@@ -57,6 +64,7 @@ public class MedicalRecordRepository {
 
     // This method allows to delete a medicalrecord from a list of medicalrecord
     public List<MedicalRecord> deleteMedicalRecord(String firstName, String lastName){
+        List<MedicalRecord> medicalRecordList = this.getAllMedicalRecords();
         for (MedicalRecord medicalRecord : medicalRecordList){
             if ((medicalRecord.getFirstName().equals(firstName)) && (medicalRecord.getLastName().equals(lastName))){
                 medicalRecordList.remove(medicalRecord);

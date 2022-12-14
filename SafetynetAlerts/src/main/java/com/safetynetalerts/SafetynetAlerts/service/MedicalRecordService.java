@@ -9,27 +9,25 @@ import java.util.List;
 
 @Service
 public class MedicalRecordService {
-    @Autowired
     MedicalRecordRepository medicalRecordRepository;
 
     public MedicalRecordService(MedicalRecordRepository medicalRecordRepository) {
         this.medicalRecordRepository = medicalRecordRepository;
     }
-
-    public List<MedicalRecord> findAll(){
-        return medicalRecordRepository.findAll();
+    public List<MedicalRecord> getAllMedicalRecords(){
+        return medicalRecordRepository.getAllMedicalRecords();
     }
 
-    public MedicalRecord findByName(String firstName, String lastName){
-        return medicalRecordRepository.findByName(firstName,lastName);
+    public MedicalRecord findMedicalRecordByName(String firstName, String lastName){
+        return medicalRecordRepository.findMedicalRecordByName(firstName,lastName);
     }
 
-    public List<MedicalRecord> addMedicalRecord(MedicalRecord medicalRecord){
+    public List<MedicalRecord> createMedicalRecord(MedicalRecord medicalRecord){
         return medicalRecordRepository.addMedicalRecord(medicalRecord);
     }
 
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord){
-        return medicalRecordRepository.updateMedicalRecord(medicalRecord);
+        return medicalRecordRepository.saveMedicalRecord(medicalRecord);
     }
 
     public List<MedicalRecord> deleteMedicalRecord(String firstName, String lastName){
