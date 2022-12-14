@@ -1,12 +1,14 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import com.safetynetalerts.SafetynetAlerts.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -75,5 +77,12 @@ public class PersonController {
     public List<String> getAllEmailsByCity(@RequestParam ("city")String city) {
         List<String> emails = personService.getAllEmailsByCity(city);
         return emails;
+    }
+
+    //localhost:8080/personInfo?firstName=<firstname<&lastName=<lastName>
+    @GetMapping("personinfo")
+    public PersonInfoDto getPersonInfo(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) throws ParseException {
+        PersonInfoDto personInfo = personService.getPersonInfo(firstName,lastName);
+        return personInfo;
     }
 }

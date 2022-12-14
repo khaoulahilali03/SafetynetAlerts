@@ -2,6 +2,7 @@ package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +102,19 @@ public class PersonRepository {
         }return emails;
     }
 
-
-
+    //localhost:8080/personInfo?firstName=<firstname<&lastName=<lastName>
+    // This method return all the information related to a person from the list of persons by given his name
+    public PersonInfoDto getPersonInfo(String firstName, String lastName) throws ParseException {
+        PersonInfoDto personInfoDto = new PersonInfoDto();
+        Person person = this.findPersonByName(firstName,lastName);
+        MedicalRecord medicalRecord = medicalRecordRepository.findMedicalRecordByName(firstName,lastName);
+        personInfoDto.setFirstName(firstName);
+        personInfoDto.setLastName(lastName);
+        personInfoDto.setAddress(person.getAddress());
+        personInfoDto.setAge(medicalRecord.getAge());
+        personInfoDto.setEmail(person.getEmail());
+        personInfoDto.setMedications(medicalRecord.getMedications());
+        personInfoDto.setAllergies(medicalRecord.getAllergies());
+        return personInfoDto;
+    }
 }

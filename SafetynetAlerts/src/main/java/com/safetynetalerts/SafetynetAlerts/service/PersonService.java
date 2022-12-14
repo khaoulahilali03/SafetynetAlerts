@@ -1,10 +1,12 @@
 package com.safetynetalerts.SafetynetAlerts.service;
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import com.safetynetalerts.SafetynetAlerts.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -47,4 +49,9 @@ public class PersonService {
     public List<String> getAllEmailsByCity(String city) {
         return personRepository.getAllEmailsByCity(city);
     }
+
+    public PersonInfoDto getPersonInfo(String firstName, String lastName) throws ParseException {
+        return personRepository.getPersonInfo(firstName,lastName);
+    }
+
 }
