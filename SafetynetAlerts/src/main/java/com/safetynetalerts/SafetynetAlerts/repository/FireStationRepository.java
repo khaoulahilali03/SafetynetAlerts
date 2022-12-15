@@ -2,10 +2,12 @@ package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
+import com.safetynetalerts.SafetynetAlerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -80,6 +82,21 @@ public class FireStationRepository {
                 fireStationList.remove(fireStation);
             }
         }return fireStationList;
+    }
+
+    //localhost:8080/phoneAlert?firestation=<firestation_number>
+    // This method return the list of phone number of the person related to a specific number station 
+    public LinkedHashSet<String> getPhoneNumberForAStation(String numberStation){
+        LinkedHashSet<String> phoneNumbers = new LinkedHashSet<>();
+        for (FireStation fireStation: this.getAllFireStations()){
+            if (fireStation.getStation().equals(numberStation)){
+                for (Person person: personRepository.getAllPersons()){
+                    if (fireStation.getAddress().equals(person.getAddress())){
+                        phoneNumbers.add(person.getPhone());
+                    }
+                }
+            }
+        }return phoneNumbers;
     }
 
 

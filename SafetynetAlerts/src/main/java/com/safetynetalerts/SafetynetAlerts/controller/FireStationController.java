@@ -4,6 +4,7 @@ import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,12 @@ public class FireStationController {
     @DeleteMapping("fireStation/{address}")
     public List<FireStation> deleteFireStation(@PathVariable ("address") String address){
         return fireStationService.deleteFireStation(address);
+    }
+
+    //localhost:8080/phoneAlert?firestation=<firestation_number>
+    @GetMapping("phonealert")
+    public LinkedHashSet<String> getPhoneNumberForAStation(@RequestParam("numberStation") String numberStation){
+        return fireStationService.getPhoneNumberForAStation(numberStation);
     }
 
 

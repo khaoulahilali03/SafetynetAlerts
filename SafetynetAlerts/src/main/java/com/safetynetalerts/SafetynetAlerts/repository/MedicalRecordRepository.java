@@ -79,7 +79,7 @@ public class MedicalRecordRepository {
 
 
     //localhost:8080/childAlert?address=<address>
-    // This method return a list of children and adults who lives in an address 
+    // This method return a list of children and adults who lives in an address
     public ChildAlertDto getChildAlert(String address) throws ParseException {
         ChildAlertDto childAlertDto = new ChildAlertDto();
         List<AChild> childList = new ArrayList<>();

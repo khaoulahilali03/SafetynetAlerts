@@ -4,6 +4,7 @@ import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.repository.FireStationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -33,6 +34,9 @@ public class FireStationService {
 
     public List<FireStation> deleteFireStation(String address) {
         return fireStationRepository.deleteFireStation(address);
+    }
+    public LinkedHashSet<String> getPhoneNumberForAStation(String numberStation){
+        return fireStationRepository.getPhoneNumberForAStation(numberStation);
     }
 
 
