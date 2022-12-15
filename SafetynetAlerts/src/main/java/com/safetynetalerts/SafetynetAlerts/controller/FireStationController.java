@@ -1,9 +1,11 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -50,6 +52,13 @@ public class FireStationController {
     public LinkedHashSet<String> getPhoneNumberForAStation(@RequestParam("numberStation") String numberStation){
         return fireStationService.getPhoneNumberForAStation(numberStation);
     }
+
+    //localhost:8080/fire?address=<address>
+    @GetMapping("fire")
+    public FireDto findStationByAddress(@RequestParam("address") String address) throws ParseException {
+        return fireStationService.findStationByAddress(address);
+    }
+
 
 
 }
