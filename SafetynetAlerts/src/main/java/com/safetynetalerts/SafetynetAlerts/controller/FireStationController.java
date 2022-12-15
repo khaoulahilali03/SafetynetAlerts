@@ -1,6 +1,7 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +60,11 @@ public class FireStationController {
         return fireStationService.findStationByAddress(address);
     }
 
+    //localhost:8080/firestation?stationNumber=<station_number>
+    @GetMapping("firestationsn")
+    public PersonCoveredByFireStationDto findPersonsByStationNumber(@RequestParam("numberStation") String numberStation) throws ParseException {
+        return fireStationService.findPersonsByStationNumber(numberStation);
+    }
 
 
 }

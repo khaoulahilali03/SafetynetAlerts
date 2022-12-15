@@ -1,7 +1,9 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.APerson;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
@@ -124,9 +126,43 @@ public class FireStationRepository {
         fireDto.setPersonWithMedicalRecordDtoList(personWithMedicalRecordList);
         fireDto.setStationsNumbers(numberStation);
         return fireDto;
+    }
 
+
+    //localhost:8080/firestation?stationNumber=<station_number>
+    // This method return a list of persons and the count of adults and children who are covered by a specific fire station
+    public PersonCoveredByFireStationDto findPersonsByStationNumber(String numberStation) throws ParseException {
+        PersonCoveredByFireStationDto personCoveredByFireStation = new PersonCoveredByFireStationDto();
+        Set<APerson> personSet = new LinkedHashSet<>();
+        int total_adult = 0;
+        int total_child = 0;
+        for (FireStation fireStation : this.getAllFireStations()){
+            if (fireStation.getStation().equals(numberStation)){
+                for (Person person : personRepository.getAllPersons()){
+                    if (fireStation.getAddress().equals(person.getAddress())){
+                        String firstName = person.getFirstName();
+                        String lastname = person.getLastName();
+                        String address = person.getAddress();
+                        MedicalRecord medicalRecord = medicalRecordRepository.findMedicalRecordByName(firstName,lastname);
+                        Integer age = medicalRecord.getAge();
+                        String phone = person.getPhone();
+                        if (age <= 18){
+                            total_child++;
+                        }else {
+                            total_adult++;
+                        }
+                        personSet.add(new APerson(firstName,lastname,address,phone));
+                    }
+                }
+
+            }
+        }personCoveredByFireStation.setPersonSet(personSet);
+        personCoveredByFireStation.setAdult_count(total_adult);
+        personCoveredByFireStation.setChild_count(total_child);
+        return personCoveredByFireStation;
 
     }
+
 
 
 

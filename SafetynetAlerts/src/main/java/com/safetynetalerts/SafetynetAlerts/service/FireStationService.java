@@ -1,6 +1,7 @@
 package com.safetynetalerts.SafetynetAlerts.service;
 
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.repository.FireStationRepository;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,8 @@ public class FireStationService {
         return fireStationRepository.findStationByAddress(address);
     }
 
+    public PersonCoveredByFireStationDto findPersonsByStationNumber(String numberStation) throws ParseException {
+        return fireStationRepository.findPersonsByStationNumber(numberStation);
+    }
 
 }
