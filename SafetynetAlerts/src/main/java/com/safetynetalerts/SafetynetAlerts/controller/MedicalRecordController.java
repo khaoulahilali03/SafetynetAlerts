@@ -1,11 +1,13 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.repository.MedicalRecordRepository;
 import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -56,7 +58,13 @@ public class MedicalRecordController {
     @DeleteMapping("medicalrecord/{firstname}/{lastname}")
     public List<MedicalRecord> deleteMedicalRecord(@PathVariable("firstname") String firstName,@PathVariable("lastname") String lastName){
         return  medicalRecordService.deleteMedicalRecord(firstName,lastName);
-
     }
+
+    //localhost:8080/childAlert?address=<address>
+    @GetMapping("childalert")
+    public ChildAlertDto getChildAlert(@RequestParam("address") String address) throws ParseException {
+        return medicalRecordService.getChildAlert(address);
+    }
+
 
 }

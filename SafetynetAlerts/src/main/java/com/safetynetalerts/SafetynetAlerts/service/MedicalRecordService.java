@@ -1,10 +1,12 @@
 package com.safetynetalerts.SafetynetAlerts.service;
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.repository.MedicalRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -32,5 +34,9 @@ public class MedicalRecordService {
 
     public List<MedicalRecord> deleteMedicalRecord(String firstName, String lastName){
         return medicalRecordRepository.deleteMedicalRecord(firstName,lastName);
+    }
+
+    public ChildAlertDto getChildAlert(String address) throws ParseException {
+        return medicalRecordRepository.getChildAlert(address);
     }
 }

@@ -2,13 +2,18 @@ package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.AChild;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
+import com.safetynetalerts.SafetynetAlerts.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 public class MedicalRecordRepository {
@@ -70,5 +75,28 @@ public class MedicalRecordRepository {
                 medicalRecordList.remove(medicalRecord);
             }
         }return medicalRecordList;
+    }
+
+
+    //localhost:8080/childAlert?address=<address>
+    // This method return a list of children and adults who lives in an address 
+    public ChildAlertDto getChildAlert(String address) throws ParseException {
+        ChildAlertDto childAlertDto = new ChildAlertDto();
+        List<AChild> childList = new ArrayList<>();
+        List<Person> memberFamily = new ArrayList<>();
+        for (Person person : personRepository.getAllPersons()){
+            if (person.getAddress().equals(address)){
+                MedicalRecord medicalRecord = this.findMedicalRecordByName(person.getFirstName(),person.getLastName());
+                if ((person.getLastName().equals(medicalRecord.getLastName())&&(medicalRecord.getAge() > 18))){
+                    memberFamily.add(person);}
+                if (medicalRecord.getAge() <= 18){
+                    childList.add(new AChild(medicalRecord.getFirstName(), medicalRecord.getLastName(), medicalRecord.getAge()));
+                }
+            }
+
+            childAlertDto.setChildren(childList);
+            childAlertDto.setFamilyMembers(memberFamily);
+        }if (childList.isEmpty()) return null;
+        return childAlertDto;
     }
 }
