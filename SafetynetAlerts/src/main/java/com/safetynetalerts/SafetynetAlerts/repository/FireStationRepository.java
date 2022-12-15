@@ -85,7 +85,7 @@ public class FireStationRepository {
     }
 
     //localhost:8080/phoneAlert?firestation=<firestation_number>
-    // This method return the list of phone number of the person related to a specific number station 
+    // This method return the list of phone number of the person related to a specific number of a fire station
     public LinkedHashSet<String> getPhoneNumberForAStation(String numberStation){
         LinkedHashSet<String> phoneNumbers = new LinkedHashSet<>();
         for (FireStation fireStation: this.getAllFireStations()){
