@@ -2,6 +2,7 @@ package com.safetynetalerts.SafetynetAlerts.controller;
 
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class FireStationController {
@@ -65,6 +68,14 @@ public class FireStationController {
     public PersonCoveredByFireStationDto findPersonsByStationNumber(@RequestParam("numberStation") String numberStation) throws ParseException {
         return fireStationService.findPersonsByStationNumber(numberStation);
     }
+
+
+    //localhost:8080/flood:stations?stations=<a list of station_number>
+    @GetMapping("flood")
+    public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(@RequestParam("stationsNumber") List<String> stationsNumber) throws ParseException {
+        return fireStationService.findAllPersonByStation(stationsNumber);
+    }
+
 
 
 }

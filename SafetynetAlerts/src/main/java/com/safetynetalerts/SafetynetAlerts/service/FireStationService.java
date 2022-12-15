@@ -2,6 +2,7 @@ package com.safetynetalerts.SafetynetAlerts.service;
 
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.repository.FireStationRepository;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class FireStationService {
@@ -49,5 +52,11 @@ public class FireStationService {
     public PersonCoveredByFireStationDto findPersonsByStationNumber(String numberStation) throws ParseException {
         return fireStationRepository.findPersonsByStationNumber(numberStation);
     }
+
+
+    public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(List<String> stationsNumber) throws ParseException {
+        return fireStationRepository.findAllPersonByStation(stationsNumber);
+    }
+
 
 }

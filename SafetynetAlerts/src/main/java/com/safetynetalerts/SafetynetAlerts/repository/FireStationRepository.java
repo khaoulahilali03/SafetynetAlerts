@@ -1,10 +1,7 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
-import com.safetynetalerts.SafetynetAlerts.model.DTO.APerson;
-import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
-import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
-import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.*;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
@@ -160,8 +157,62 @@ public class FireStationRepository {
         personCoveredByFireStation.setAdult_count(total_adult);
         personCoveredByFireStation.setChild_count(total_child);
         return personCoveredByFireStation;
-
     }
+
+    // This method return a map of personWithMedicalRecord by address
+    public Map<String, Set<PersonWithMedicalRecord>> getMap(List<FloodStationDto> floodStationDtoList, Set<String> addresses){
+        Map<String, Set<PersonWithMedicalRecord>> dtoMap = new HashMap<>();
+        for (String address : addresses){
+            Set<PersonWithMedicalRecord> personWithMedicalRecords = new HashSet<>();
+            for (FloodStationDto floodStationDto : floodStationDtoList){
+                if (floodStationDto.getAddress().equals(address)){
+                    personWithMedicalRecords.add(floodStationDto.getPersonWithMedicalRecord());
+                }
+            }
+            dtoMap.put(address,personWithMedicalRecords);
+        }
+        return dtoMap;
+    }
+
+    //localhost:8080/flood:stations?stations=<a list of station_number>
+    // This method a map of the persons and their medical records and addresses who are covered by a list of firestations
+    public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(List<String> stationsNumber) throws ParseException {
+        Map<String, Set<PersonWithMedicalRecord>> map;
+        List<FloodStationDto> list = new ArrayList<>();
+        Set<String> groupAddress = new HashSet<>();
+        List<Person> personList= personRepository.getAllPersons();
+        for (String stationNumber : stationsNumber) {
+            for(FireStation fireStation: this.getAllFireStations()){
+                if (fireStation.getStation().equals(stationNumber)){
+                    groupAddress.add(fireStation.getAddress());
+                }
+            }
+        }
+        for (String stationNumber : stationsNumber){
+            for (FireStation fireStation : this.getAllFireStations()){
+                if (fireStation.getStation().equals(stationNumber)){
+                    for (Person person: personList){
+                        if (fireStation.getAddress().equals(person.getAddress())){
+                            String firstName = person.getFirstName();
+                            String lastName = person.getLastName();
+                            String phone = person.getPhone();
+                            MedicalRecord medicalRecord = medicalRecordRepository.findMedicalRecordByName(firstName, lastName);
+                            Integer age = medicalRecord.getAge();
+                            List<String> medications = medicalRecord.getMedications();
+                            List<String> allergies  = medicalRecord.getAllergies();
+                            list.add(new FloodStationDto(person.getAddress(), new PersonWithMedicalRecord(firstName,lastName,phone,age,medications,allergies)));
+                        }
+                    }
+                }
+            }
+        }
+
+        map= getMap(list, groupAddress);
+        return map;
+    }
+
+
+
 
 
 
