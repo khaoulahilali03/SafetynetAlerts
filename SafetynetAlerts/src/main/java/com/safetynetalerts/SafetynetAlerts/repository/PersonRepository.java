@@ -108,6 +108,7 @@ public class PersonRepository {
         PersonInfoDto personInfoDto = new PersonInfoDto();
         Person person = this.findPersonByName(firstName,lastName);
         MedicalRecord medicalRecord = medicalRecordRepository.findMedicalRecordByName(firstName,lastName);
+        if (person == null || medicalRecord == null) return null;
         personInfoDto.setFirstName(firstName);
         personInfoDto.setLastName(lastName);
         personInfoDto.setAddress(person.getAddress());
