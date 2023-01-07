@@ -23,27 +23,27 @@ public class DataStore {
     }
 
     public List<Person> getPersons() {
-        return persons;
+        return new ArrayList<>(persons);
     }
 
     public void setPersons(List<Person> persons) {
-        this.persons = persons;
+        this.persons = new ArrayList<>(persons);
     }
 
     public List<FireStation> getFirestations() {
-        return firestations;
+        return new ArrayList<>(firestations);
     }
 
     public void setFirestations(List<FireStation> firestations) {
-        this.firestations = firestations;
+        this.firestations = new ArrayList<>(firestations);
     }
 
     public List<MedicalRecord> getMedicalrecords() {
-        return medicalrecords;
+        return new ArrayList<>(medicalrecords);
     }
 
     public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
-        this.medicalrecords = medicalrecords;
+        this.medicalrecords = new ArrayList<>(medicalrecords);
     }
 
     @PostConstruct

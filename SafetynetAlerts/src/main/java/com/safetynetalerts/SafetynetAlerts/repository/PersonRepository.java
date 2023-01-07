@@ -1,15 +1,12 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
-import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
-import java.nio.file.Paths;
+import javax.sql.rowset.BaseRowSet;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,32 +50,32 @@ public class PersonRepository {
     // This method allows to add a new person to the list of persons
     public List<Person> addPerson(Person person){
         List<Person> personList = this.getAllPersons();
-        personList.add(person);
+        for (Person person1 : personList){
+            if (person1.getFirstName().equals(person.getFirstName()) && person1.getLastName().equals(person.getLastName()))
+                break;
+            else
+                personList.add(person);
+                break;
+
+        }
         return personList;
+
     }
 
     // This method allows to update the informations of a person
     public Person savePerson(Person person){
-        String address = person.getAddress();
-        person.setAddress(address);
-
-        String city = person.getCity();
-        person.setCity(city);
-
-        String zip = person.getZip();
-        person.setZip(zip);
-
-        String phone = person.getPhone();
-        person.setPhone(phone);
-
-        String email = person.getEmail();
-        person.setEmail(email);
-
-        if ((person.getAddress().equals(address)) && (person.getCity().equals(city)) && (person.getZip().equals(zip)) && (person.getPhone().equals(phone)) && (person.getEmail().equals(email))){
-            return null;
-        }else {
-            return person;
+        if (person.getFirstName() != null && person.getLastName() != null){
+            for (Person person1: this.getAllPersons())
+                if (person1.getFirstName().equals(person.getFirstName()) && person1.getLastName().equals(person.getLastName())){
+                    person1.setAddress(person.getAddress());
+                    person1.setCity(person.getCity());
+                    person1.setZip(person.getZip());
+                    person1.setPhone(person.getPhone());
+                    person1.setEmail(person.getEmail());
+                    return person;
+                }
         }
+        return null;
     }
 
     // This method allows to delete a person from a list of persons
@@ -87,6 +84,7 @@ public class PersonRepository {
         for (Person person : personList){
             if ((person.getFirstName().equals(firstName)) && (person.getLastName().equals(lastname))){
                 personList.remove(person);
+                break;
             }
         }return personList;
     }

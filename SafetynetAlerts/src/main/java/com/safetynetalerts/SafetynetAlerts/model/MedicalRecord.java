@@ -3,6 +3,7 @@ package com.safetynetalerts.SafetynetAlerts.model;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalRecord {
@@ -20,8 +21,8 @@ public class MedicalRecord {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
-        this.medications = medications;
-        this.allergies = allergies;
+        this.medications = new ArrayList<>(medications);
+        this.allergies = new ArrayList<>(allergies);
     }
 
     public String getFirstName() {
@@ -49,19 +50,19 @@ public class MedicalRecord {
     }
 
     public List<String> getMedications() {
-        return medications;
+        return new ArrayList<>(medications);
     }
 
     public void setMedications(List<String> medications) {
-        this.medications = medications;
+        this.medications = new ArrayList<>(medications);
     }
 
     public List<String> getAllergies() {
-        return allergies;
+        return new ArrayList<>(allergies);
     }
 
     public void setAllergies(List<String> allergies) {
-        this.allergies = allergies;
+        this.allergies = new ArrayList<>(allergies);
     }
 
     @Override

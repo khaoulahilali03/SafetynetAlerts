@@ -1,5 +1,6 @@
 package com.safetynetalerts.SafetynetAlerts.model.DTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonInfoDto {
@@ -20,8 +21,8 @@ public class PersonInfoDto {
         this.address = address;
         this.age = age;
         this.email = email;
-        this.medications = medications;
-        this.allergies = allergies;
+        this.medications = new ArrayList<>(medications);
+        this.allergies = new ArrayList<>(allergies);
     }
 
     public String getFirstName() {
@@ -65,18 +66,18 @@ public class PersonInfoDto {
     }
 
     public List<String> getMedications() {
-        return medications;
+        return new ArrayList<>(medications);
     }
 
     public void setMedications(List<String> medications) {
-        this.medications = medications;
+        this.medications = new ArrayList<>(medications);
     }
 
     public List<String> getAllergies() {
-        return allergies;
+        return new ArrayList<>(allergies);
     }
 
     public void setAllergies(List<String> allergies) {
-        this.allergies = allergies;
+        this.allergies = new ArrayList<>(allergies);
     }
 }

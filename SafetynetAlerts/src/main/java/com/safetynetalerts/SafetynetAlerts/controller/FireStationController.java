@@ -1,10 +1,13 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.EmptyJsonResponse;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.FireDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -32,7 +35,7 @@ public class FireStationController {
     }
 
     @PutMapping("firestation/{address}")
-    public List<FireStation> updateFireStation(@PathVariable("address") String address, @RequestBody FireStation fireStation){
+    public ResponseEntity<Object> updateFireStation(@PathVariable("address") String address, @RequestBody FireStation fireStation){
         FireStation currentFireStation = fireStationService.findFireStationByAddress(address);
         if (currentFireStation != null){
             String station = fireStation.getStation();
@@ -40,13 +43,13 @@ public class FireStationController {
                 currentFireStation.setStation(station);
             }
             fireStationService.updateFireStation(currentFireStation);
-            return fireStationService.createFireStation(currentFireStation);
+            return new ResponseEntity<>(fireStationService.createFireStation(currentFireStation), HttpStatus.OK);
         }else {
-            return null;
+            return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("fireStation/{address}")
+    @DeleteMapping("firestation/{address}")
     public List<FireStation> deleteFireStation(@PathVariable ("address") String address){
         return fireStationService.deleteFireStation(address);
     }

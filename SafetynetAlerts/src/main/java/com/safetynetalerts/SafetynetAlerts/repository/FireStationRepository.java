@@ -39,8 +39,8 @@ public class FireStationRepository {
         }return null;
     }
 
-    // This method returna firestation by a given station number
-    public FireStation findFirestationByNumberStation(String numberStation){
+    // This method return a firestation by a given station number
+    public FireStation findFireStationByNumberStation(String numberStation){
         List<FireStation> fireStationList = this.getAllFireStations();
         for (FireStation fireStation : fireStationList){
             if (fireStation.getStation().equals(numberStation))
@@ -59,7 +59,13 @@ public class FireStationRepository {
     //This method allows to add a new firestation to the list of firestations
     public List<FireStation> addFireStation(FireStation fireStation){
         List<FireStation> fireStationList = this.getAllFireStations();
-        fireStationList.add(fireStation);
+        for (FireStation fireStation1 : fireStationList){
+            if (fireStation1.getAddress().equals(fireStation.getAddress()))
+                break;
+            else
+                fireStationList.add(fireStation);
+            break;
+        }
         return fireStationList;
     }
 
@@ -80,6 +86,7 @@ public class FireStationRepository {
         for (FireStation fireStation : fireStationList){
             if (fireStation.getAddress().equals(address)){
                 fireStationList.remove(fireStation);
+                break;
             }
         }return fireStationList;
     }

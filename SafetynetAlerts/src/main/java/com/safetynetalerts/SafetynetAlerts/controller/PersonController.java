@@ -1,20 +1,24 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
 
+import com.safetynetalerts.SafetynetAlerts.model.DTO.EmptyJsonResponse;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import com.safetynetalerts.SafetynetAlerts.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 public class PersonController {
 
     private PersonService personService;
+
 
     public PersonController(PersonService personService) {
         this.personService = personService;
@@ -31,7 +35,7 @@ public class PersonController {
     }
 
     @PutMapping("person/{firstname}/{lastname}")
-    public List<Person> updatePerson(@PathVariable("firstname") final String firstName, @PathVariable("lastname") final String lastName, @RequestBody Person person){
+    public ResponseEntity<Object> updatePerson(@PathVariable("firstname") final String firstName, @PathVariable("lastname") final String lastName, @RequestBody Person person){
         Person currentPerson = personService.findPersonByName(firstName,lastName);
         if (currentPerson != null){
 
@@ -61,10 +65,11 @@ public class PersonController {
             }
 
             personService.updatePerson(currentPerson);
-            return personService.createPerson(currentPerson);
+            return new ResponseEntity<>(personService.createPerson(currentPerson), HttpStatus.OK);
         }else {
-            return null;
+            return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.NOT_FOUND);
         }
+
     }
 
     @DeleteMapping("person/{firstname}/{lastname}")
@@ -81,8 +86,14 @@ public class PersonController {
 
     //localhost:8080/personInfo?firstName=<firstname<&lastName=<lastName>
     @GetMapping("personinfo")
-    public PersonInfoDto getPersonInfo(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) throws ParseException {
+    public ResponseEntity<Object> getPersonInfo(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) throws ParseException {
         PersonInfoDto personInfo = personService.getPersonInfo(firstName,lastName);
-        return personInfo;
-    }
+        if (personInfo != null)
+            return new ResponseEntity<>(personInfo, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
+
+        }
+
+
 }

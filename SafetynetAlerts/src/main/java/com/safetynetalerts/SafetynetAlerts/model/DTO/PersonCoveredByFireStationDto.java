@@ -1,5 +1,6 @@
 package com.safetynetalerts.SafetynetAlerts.model.DTO;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class PersonCoveredByFireStationDto {
@@ -11,17 +12,17 @@ public class PersonCoveredByFireStationDto {
     }
 
     public PersonCoveredByFireStationDto(Set<APerson> personSet, int adult_count, int child_count) {
-        this.personSet = personSet;
+        this.personSet = new HashSet<>(personSet);
         this.adult_count = adult_count;
         this.child_count = child_count;
     }
 
     public Set<APerson> getPersonSet() {
-        return personSet;
+        return new HashSet<>(personSet);
     }
 
     public void setPersonSet(Set<APerson> personSet) {
-        this.personSet = personSet;
+        this.personSet = new HashSet<>(personSet);
     }
 
     public int getAdult_count() {

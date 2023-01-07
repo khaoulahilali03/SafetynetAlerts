@@ -1,6 +1,6 @@
 package com.safetynetalerts.SafetynetAlerts.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.safetynetalerts.SafetynetAlerts.database.DataStore;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.AChild;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +43,13 @@ public class MedicalRecordRepository {
     // This method allows to add a new medicalrecord to the list of persons
     public List<MedicalRecord> addMedicalRecord(MedicalRecord medicalRecord){
         List<MedicalRecord> medicalRecordList= this.getAllMedicalRecords();
-        medicalRecordList.add(medicalRecord);
+        for (MedicalRecord medicalRecord1 : medicalRecordList){
+            if (medicalRecord1.getFirstName().equals(medicalRecord1.getFirstName()) && medicalRecord1.getLastName().equals(medicalRecord.getLastName()))
+                break;
+            else
+                medicalRecordList.add(medicalRecord);
+                break;
+        }
         return medicalRecordList;
     }
 
@@ -73,6 +77,7 @@ public class MedicalRecordRepository {
         for (MedicalRecord medicalRecord : medicalRecordList){
             if ((medicalRecord.getFirstName().equals(firstName)) && (medicalRecord.getLastName().equals(lastName))){
                 medicalRecordList.remove(medicalRecord);
+                break;
             }
         }return medicalRecordList;
     }
@@ -84,19 +89,30 @@ public class MedicalRecordRepository {
         ChildAlertDto childAlertDto = new ChildAlertDto();
         List<AChild> childList = new ArrayList<>();
         List<Person> memberFamily = new ArrayList<>();
-        for (Person person : personRepository.getAllPersons()){
+        List<Person> personList = personRepository.findPersonByAddress(address);
+       /* if (personList.size() == 0 )
+            return null;*/
+        for (Person person : personList){
+            String firstname = person.getFirstName();
+            String lastname = person.getLastName();
+
             if (person.getAddress().equals(address)){
-                MedicalRecord medicalRecord = this.findMedicalRecordByName(person.getFirstName(),person.getLastName());
-                if ((person.getLastName().equals(medicalRecord.getLastName())&&(medicalRecord.getAge() > 18))){
-                    memberFamily.add(person);}
+                MedicalRecord medicalRecord = this.findMedicalRecordByName(firstname,lastname);
                 if (medicalRecord.getAge() <= 18){
                     childList.add(new AChild(medicalRecord.getFirstName(), medicalRecord.getLastName(), medicalRecord.getAge()));
                 }
+                if ((person.getLastName().equals(medicalRecord.getLastName())&&(medicalRecord.getAge() > 18))){
+                        memberFamily.add(person);
+                    }
+            }else {
+                return null;
             }
-
             childAlertDto.setChildren(childList);
             childAlertDto.setFamilyMembers(memberFamily);
-        }if (childList.isEmpty()) return null;
+        }
+        if (childList.isEmpty())
+            childAlertDto.setFamilyMembers(new ArrayList<>());
+
         return childAlertDto;
     }
 }

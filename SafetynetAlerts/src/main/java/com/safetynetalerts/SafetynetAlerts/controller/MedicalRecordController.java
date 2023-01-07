@@ -1,10 +1,13 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
 import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
+import com.safetynetalerts.SafetynetAlerts.model.DTO.EmptyJsonResponse;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
-import com.safetynetalerts.SafetynetAlerts.repository.MedicalRecordRepository;
 import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -29,7 +32,7 @@ public class MedicalRecordController {
     }
 
     @PutMapping("medicalrecord/{firstname}/{lastname}")
-    public List<MedicalRecord> updateMedicalRecord(@PathVariable("firstname") String firstName, @PathVariable("lastname") String lastName, @RequestBody MedicalRecord medicalRecord){
+    public ResponseEntity<Object> updateMedicalRecord(@PathVariable("firstname") String firstName, @PathVariable("lastname") String lastName, @RequestBody MedicalRecord medicalRecord){
         MedicalRecord currentMedicalRecord = medicalRecordService.findMedicalRecordByName(firstName,lastName);
         if (currentMedicalRecord != null){
 
@@ -49,9 +52,9 @@ public class MedicalRecordController {
             }
 
             medicalRecordService.updateMedicalRecord(currentMedicalRecord);
-            return medicalRecordService.createMedicalRecord(currentMedicalRecord);
+            return new ResponseEntity<>(medicalRecordService.createMedicalRecord(currentMedicalRecord), HttpStatus.OK);
         }else {
-            return null;
+            return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -62,8 +65,11 @@ public class MedicalRecordController {
 
     //localhost:8080/childAlert?address=<address>
     @GetMapping("childalert")
-    public ChildAlertDto getChildAlert(@RequestParam("address") String address) throws ParseException {
-        return medicalRecordService.getChildAlert(address);
+    public ResponseEntity<Object> getChildAlert(@RequestParam("address") String address) throws ParseException {
+        if (address != null)
+            return new ResponseEntity<>(medicalRecordService.getChildAlert(address),HttpStatus.OK) ;
+        else
+            return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

@@ -10,7 +10,7 @@ public class FireStation {
 
     public FireStation(String address, String stationNumber) {
         this.address = address;
-        this.station = station;
+        this.station = stationNumber;
     }
 
     public String getAddress() {
