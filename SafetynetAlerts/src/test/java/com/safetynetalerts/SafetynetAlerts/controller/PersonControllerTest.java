@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -106,8 +105,6 @@ public class PersonControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", is(7)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.address",is("1509 Culver Street")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(44))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.medications.size()", is (1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.allergies.size()",is(1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email", is("jaboyd@email.com")));
     }

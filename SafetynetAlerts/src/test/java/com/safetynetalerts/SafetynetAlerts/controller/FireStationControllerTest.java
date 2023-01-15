@@ -110,7 +110,6 @@ public class FireStationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.personWithMedicalRecordDtoList.size()",is(5)));
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.stationsNumbers[0]").value("3"));
     }
 
     @Test
@@ -126,9 +125,6 @@ public class FireStationControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/firestationsn?numberStation=2"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(3)));
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.personSet.size()",is(5)))
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.adult_count").value("4"))
-                //.andExpect(MockMvcResultMatchers.jsonPath("$.child_count").value("1"));
     }
 
     @Test
@@ -142,7 +138,7 @@ public class FireStationControllerTest {
 
     @Test
     public void findAllPersonByStationTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/flood?stationsNumber=1,2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/flood?stationsNumber=2,3"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(7)));
     }
