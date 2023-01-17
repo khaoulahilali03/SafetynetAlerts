@@ -6,7 +6,6 @@ import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.rowset.BaseRowSet;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

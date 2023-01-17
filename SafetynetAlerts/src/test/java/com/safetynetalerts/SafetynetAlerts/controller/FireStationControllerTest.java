@@ -1,6 +1,5 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import org.junit.jupiter.api.Test;
