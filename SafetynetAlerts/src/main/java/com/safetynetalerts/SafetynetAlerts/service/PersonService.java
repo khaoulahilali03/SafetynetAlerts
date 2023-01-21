@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @Service
 public class PersonService {
 
     @Autowired
     PersonRepository personRepository;
+
+   // private static final Logger logger = LogManager.getLogManager().getLogger("PersonService");
 
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
@@ -33,7 +37,8 @@ public class PersonService {
     }
 
     public List<Person> createPerson(Person person){
-
+       // List<Person> persons = ;
+        //logger.info("create person ("+person+")");
         return personRepository.addPerson(person);
     }
 

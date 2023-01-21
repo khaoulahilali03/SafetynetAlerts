@@ -1,37 +1,39 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
-import com.safetynetalerts.SafetynetAlerts.model.DTO.ChildAlertDto;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.EmptyJsonResponse;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.service.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 public class MedicalRecordController {
     private MedicalRecordService medicalRecordService;
+
+    private static final Logger logger = Logger.getLogger("MedicalRecordController");
     @Autowired
     public MedicalRecordController(MedicalRecordService medicalRecordService) {
         this.medicalRecordService = medicalRecordService;
     }
 
-    @GetMapping("medicalrecord")
+    @GetMapping("medicalRecord")
     public List<MedicalRecord> getAllMedicalRecords(){
         return medicalRecordService.getAllMedicalRecords();
     }
 
-    @PostMapping("medicalrecord")
+    @PostMapping("medicalRecord")
     public List<MedicalRecord> createMedicalRecord(@RequestBody MedicalRecord medicalRecord){
+        logger.info(""+medicalRecord+"is created");
         return medicalRecordService.createMedicalRecord(medicalRecord);
     }
 
-    @PutMapping("medicalrecord/{firstname}/{lastname}")
+    @PutMapping("medicalRecord/{firstname}/{lastname}")
     public ResponseEntity<Object> updateMedicalRecord(@PathVariable("firstname") String firstName, @PathVariable("lastname") String lastName, @RequestBody MedicalRecord medicalRecord){
         MedicalRecord currentMedicalRecord = medicalRecordService.findMedicalRecordByName(firstName,lastName);
         if (currentMedicalRecord != null){
@@ -50,26 +52,30 @@ public class MedicalRecordController {
             if (allergies != null){
                 currentMedicalRecord.setAllergies(allergies);
             }
-
             medicalRecordService.updateMedicalRecord(currentMedicalRecord);
+            logger.info(""+medicalRecord+"is updated");
             return new ResponseEntity<>(medicalRecordService.createMedicalRecord(currentMedicalRecord), HttpStatus.OK);
         }else {
+            logger.info("Failed to update "+medicalRecord);
             return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("medicalrecord/{firstname}/{lastname}")
+    @DeleteMapping("medicalRecord/{firstname}/{lastname}")
     public List<MedicalRecord> deleteMedicalRecord(@PathVariable("firstname") String firstName,@PathVariable("lastname") String lastName){
+        logger.info("Medical Record " +firstName+" "+lastName+"is deleted");
         return  medicalRecordService.deleteMedicalRecord(firstName,lastName);
     }
 
     //localhost:8080/childAlert?address=<address>
-    @GetMapping("childalert")
+    @GetMapping("childAlert")
     public ResponseEntity<Object> getChildAlert(@RequestParam("address") String address) throws ParseException {
         if (address != null)
-            return new ResponseEntity<>(medicalRecordService.getChildAlert(address),HttpStatus.OK) ;
+        {logger.info("Children living in the"+address+"");
+            return new ResponseEntity<>(medicalRecordService.getChildAlert(address),HttpStatus.OK) ;}
         else
-            return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.INTERNAL_SERVER_ERROR);
+        {logger.info("This address is not found");
+            return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.INTERNAL_SERVER_ERROR);}
     }
 
 

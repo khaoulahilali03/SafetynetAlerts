@@ -15,26 +15,30 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @RestController
 public class FireStationController {
     private FireStationService fireStationService;
 
+    private static final Logger logger = Logger.getLogger("FireStationController");
+
     public FireStationController(FireStationService fireStationService) {
         this.fireStationService = fireStationService;
     }
 
-    @GetMapping("firestation")
+    @GetMapping("firestations")
     public List<FireStation> getAllFireStations(){
         return fireStationService.getAllFireStations();
     }
 
-    @PostMapping("firestation")
+    @PostMapping("firestations")
     public List<FireStation> createFireStation(@RequestBody FireStation fireStation){
+        logger.info(""+fireStation+" is created !");
         return fireStationService.createFireStation(fireStation);
     }
 
-    @PutMapping("firestation/{address}")
+    @PutMapping("firestations/{address}")
     public ResponseEntity<Object> updateFireStation(@PathVariable("address") String address, @RequestBody FireStation fireStation){
         FireStation currentFireStation = fireStationService.findFireStationByAddress(address);
         if (currentFireStation != null){
@@ -43,42 +47,45 @@ public class FireStationController {
                 currentFireStation.setStation(station);
             }
             fireStationService.updateFireStation(currentFireStation);
+            logger.info(""+fireStation+ " is updated !");
             return new ResponseEntity<>(fireStationService.createFireStation(currentFireStation), HttpStatus.OK);
         }else {
+            logger.info("Failed to update :" +fireStation);
             return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("firestation/{address}")
+    @DeleteMapping("firestations/{address}")
     public List<FireStation> deleteFireStation(@PathVariable ("address") String address){
+        logger.info("FireStation " +address + " is deleted !");
         return fireStationService.deleteFireStation(address);
     }
 
     //localhost:8080/phoneAlert?firestation=<firestation_number>
-    @GetMapping("phonealert")
-    public LinkedHashSet<String> getPhoneNumberForAStation(@RequestParam("numberStation") String numberStation){
+    @GetMapping("phoneAlert")
+    public LinkedHashSet<String> getPhoneNumberForAStation(@RequestParam("firestation") String numberStation){
+        logger.info("Fire Station"+numberStation+"is queried to get phones.");
         return fireStationService.getPhoneNumberForAStation(numberStation);
     }
 
     //localhost:8080/fire?address=<address>
     @GetMapping("fire")
     public FireDto findStationByAddress(@RequestParam("address") String address) throws ParseException {
+        logger.info("Station address"+address+"is queried to get stations.");
         return fireStationService.findStationByAddress(address);
     }
 
     //localhost:8080/firestation?stationNumber=<station_number>
-    @GetMapping("firestationsn")
-    public PersonCoveredByFireStationDto findPersonsByStationNumber(@RequestParam("numberStation") String numberStation) throws ParseException {
+    @GetMapping("firestation")
+    public PersonCoveredByFireStationDto findPersonsByStationNumber(@RequestParam("stationNumber") String numberStation) throws ParseException {
+        logger.info("Station number" +numberStation+ "is queried to get persons.");
         return fireStationService.findPersonsByStationNumber(numberStation);
     }
 
-
-    //localhost:8080/flood:stations?stations=<a list of station_number>
-    @GetMapping("flood")
-    public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(@RequestParam("stationsNumber") List<String> stationsNumber) throws ParseException {
+    //localhost:8080/flood/stations?stations=<a list of station_number>
+    @GetMapping("flood/stations")
+    public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(@RequestParam("stations") List<String> stationsNumber) throws ParseException {
+        logger.info("Stations " + stationsNumber + " is queried to get persons.");
         return fireStationService.findAllPersonByStation(stationsNumber);
     }
-
-
-
 }

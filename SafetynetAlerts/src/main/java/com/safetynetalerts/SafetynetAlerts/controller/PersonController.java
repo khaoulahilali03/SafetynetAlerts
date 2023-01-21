@@ -1,16 +1,19 @@
 package com.safetynetalerts.SafetynetAlerts.controller;
 
-
 import com.safetynetalerts.SafetynetAlerts.model.DTO.EmptyJsonResponse;
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonInfoDto;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
 import com.safetynetalerts.SafetynetAlerts.service.PersonService;
+
+import java.util.logging.Level;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +21,7 @@ import java.util.List;
 public class PersonController {
 
     private PersonService personService;
+    private static final Logger logger = LogManager.getLogger("PersonController");
 
 
     public PersonController(PersonService personService) {
@@ -31,7 +35,9 @@ public class PersonController {
 
     @PostMapping("person")
     public List<Person> createPerson(@RequestBody Person person){
-        return personService.createPerson(person);
+        List<Person> persons = personService.createPerson(person);
+        logger.info(""+person+" is created !");
+        return persons;
     }
 
     @PutMapping("person/{firstname}/{lastname}")
@@ -65,33 +71,43 @@ public class PersonController {
             }
 
             personService.updatePerson(currentPerson);
+            logger.info(""+person+ " is updated !");
             return new ResponseEntity<>(personService.createPerson(currentPerson), HttpStatus.OK);
         }else {
+            logger.error("Failed to update :"+person);
             return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.NOT_FOUND);
         }
-
     }
 
     @DeleteMapping("person/{firstname}/{lastname}")
     public List<Person> deletePerson(@PathVariable ("firstname") String firstName, @PathVariable("lastname") String lastName){
+        logger.info("Person " +firstName +" "+ lastName + " is deleted !");
         return personService.deletePerson(firstName,lastName);
     }
 
     //localhost:8080/communityemail?city=<city>
-    @GetMapping("communityemail")
+    @GetMapping("communityEmail")
     public List<String> getAllEmailsByCity(@RequestParam ("city")String city) {
         List<String> emails = personService.getAllEmailsByCity(city);
-        return emails;
+        if (emails != null){
+            logger.info("City " +city+ " is quiered to get all emails.");
+            return emails;
+        }else {
+            logger.info("Failed to get all emails by city: " +city);
+            return null;
+        }
     }
 
     //localhost:8080/personInfo?firstName=<firstname<&lastName=<lastName>
-    @GetMapping("personinfo")
-    public ResponseEntity<Object> getPersonInfo(@RequestParam("firstname") String firstName, @RequestParam("lastname") String lastName) throws ParseException {
+    @GetMapping("personInfo")
+    public ResponseEntity<Object> getPersonInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws ParseException {
         PersonInfoDto personInfo = personService.getPersonInfo(firstName,lastName);
         if (personInfo != null)
-            return new ResponseEntity<>(personInfo, HttpStatus.OK);
+        {logger.info("" +firstName+" "+lastName+ "information");
+            return new ResponseEntity<>(personInfo, HttpStatus.OK);}
         else
-            return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);
+            {logger.info("Person not found");
+            return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);}
 
         }
 
