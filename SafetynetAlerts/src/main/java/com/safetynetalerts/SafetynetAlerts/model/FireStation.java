@@ -3,7 +3,7 @@ package com.safetynetalerts.SafetynetAlerts.model;
 public class FireStation {
 
     private String address;
-    public String station;
+    private String station;
 
     public FireStation() {
     }
