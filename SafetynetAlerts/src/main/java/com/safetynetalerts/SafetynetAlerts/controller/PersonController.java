@@ -93,7 +93,7 @@ public class PersonController {
             logger.info("City " +city+ " is quiered to get all emails.");
             return emails;
         }else {
-            logger.info("Failed to get all emails by city: " +city);
+            logger.error("Failed to get all emails by city: " +city);
             return null;
         }
     }
@@ -106,7 +106,7 @@ public class PersonController {
         {logger.info("" +firstName+" "+lastName+ "information");
             return new ResponseEntity<>(personInfo, HttpStatus.OK);}
         else
-            {logger.info("Person not found");
+            {logger.error("Person not found");
             return new ResponseEntity<>(new EmptyJsonResponse(), HttpStatus.NOT_FOUND);}
 
         }
