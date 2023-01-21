@@ -34,7 +34,7 @@ public class MedicalRecordController {
         logger.info(""+medicalRecord+"is created");
         return medicalRecordService.createMedicalRecord(medicalRecord);
     }
-    
+
     @PutMapping("medicalRecord/{firstname}/{lastname}")
     public ResponseEntity<Object> updateMedicalRecord(@PathVariable("firstname") String firstName, @PathVariable("lastname") String lastName, @RequestBody MedicalRecord medicalRecord){
         MedicalRecord currentMedicalRecord = medicalRecordService.findMedicalRecordByName(firstName,lastName);

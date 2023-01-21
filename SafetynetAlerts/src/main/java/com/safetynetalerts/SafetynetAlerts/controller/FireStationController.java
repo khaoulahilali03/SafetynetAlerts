@@ -6,6 +6,8 @@ import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonCoveredByFireStationD
 import com.safetynetalerts.SafetynetAlerts.model.DTO.PersonWithMedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.service.FireStationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +17,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 
 @RestController
 public class FireStationController {
     private FireStationService fireStationService;
 
-    private static final Logger logger = Logger.getLogger("FireStationController");
+    private static final Logger logger = LogManager.getLogger("FireStationController");
 
     public FireStationController(FireStationService fireStationService) {
         this.fireStationService = fireStationService;
@@ -50,7 +51,7 @@ public class FireStationController {
             logger.info(""+fireStation+ " is updated !");
             return new ResponseEntity<>(fireStationService.createFireStation(currentFireStation), HttpStatus.OK);
         }else {
-            logger.info("Failed to update :" +fireStation);
+            logger.error("Failed to update :" +fireStation);
             return new ResponseEntity<>(new EmptyJsonResponse(),HttpStatus.NOT_FOUND);
         }
     }
