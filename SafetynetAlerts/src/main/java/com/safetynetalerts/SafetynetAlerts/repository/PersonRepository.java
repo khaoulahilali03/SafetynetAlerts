@@ -115,4 +115,5 @@ public class PersonRepository {
         personInfoDto.setAllergies(medicalRecord.getAllergies());
         return personInfoDto;
     }
+
 }

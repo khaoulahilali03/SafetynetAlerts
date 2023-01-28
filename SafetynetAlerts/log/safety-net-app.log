@@ -1,44 +1,53 @@
-2023-01-22 00:01:36.858  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 13932 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
-2023-01-22 00:01:36.865  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
-2023-01-22 00:01:37.725  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
-2023-01-22 00:01:37.732  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
-2023-01-22 00:01:37.732  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-01-22 00:01:37.833  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
-2023-01-22 00:01:37.833  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 911 ms
-2023-01-22 00:01:38.238  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-22 00:01:38.248  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.821 seconds (JVM running for 2.216)
-2023-01-22 00:04:52.456  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 6260 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
-2023-01-22 00:04:52.460  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
-2023-01-22 00:04:53.253  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
-2023-01-22 00:04:53.261  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
-2023-01-22 00:04:53.261  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-01-22 00:04:53.347  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
-2023-01-22 00:04:53.347  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 840 ms
-2023-01-22 00:04:53.707  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-22 00:04:53.713  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.629 seconds (JVM running for 1.952)
-2023-01-22 00:35:19.334  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 21152 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
-2023-01-22 00:35:19.334  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
-2023-01-22 00:35:20.145  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
-2023-01-22 00:35:20.153  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
-2023-01-22 00:35:20.153  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-01-22 00:35:20.259  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
-2023-01-22 00:35:20.259  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 875 ms
-2023-01-22 00:35:20.653  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-22 00:35:20.659  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.744 seconds (JVM running for 2.115)
-2023-01-22 00:35:30.481  === [http-nio-8080-exec-1] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-01-22 00:35:30.481  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Initializing Servlet 'dispatcherServlet'
-2023-01-22 00:35:30.481  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Completed initialization in 0 ms
-2023-01-22 00:35:30.592  === [http-nio-8080-exec-1] === INFO  === PersonController ===  Person{firstName='John', lastName='Boy', address='1509 Culver Street', city='Culver', zip='97451', phone='841-874-6512', email='jaboyd@email.com'} is updated !
-2023-01-22 00:36:11.806  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 13232 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
-2023-01-22 00:36:11.808  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
-2023-01-22 00:36:12.681  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
-2023-01-22 00:36:12.690  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
-2023-01-22 00:36:12.690  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-01-22 00:36:12.783  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
-2023-01-22 00:36:12.783  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 924 ms
-2023-01-22 00:36:13.172  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
-2023-01-22 00:36:13.180  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.741 seconds (JVM running for 2.094)
-2023-01-22 00:36:18.547  === [http-nio-8080-exec-1] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-01-22 00:36:18.548  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Initializing Servlet 'dispatcherServlet'
-2023-01-22 00:36:18.548  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Completed initialization in 0 ms
-2023-01-22 00:36:18.606  === [http-nio-8080-exec-1] === INFO  === PersonController ===  Person{firstName='John', lastName='Boy', address='1509 Culver Street', city='Culver', zip='97451', phone='841-874-6512', email='jaboyd@email.com'} is updated !
+2023-01-27 12:07:49.001  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 8600 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
+2023-01-27 12:07:49.018  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
+2023-01-27 12:07:50.557  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
+2023-01-27 12:07:50.568  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
+2023-01-27 12:07:50.569  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-01-27 12:07:50.697  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
+2023-01-27 12:07:50.697  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 1480 ms
+2023-01-27 12:07:51.481  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-27 12:07:51.504  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 3.099 seconds (JVM running for 3.763)
+2023-01-27 12:08:03.914  === [http-nio-8080-exec-1] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-27 12:08:03.914  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Initializing Servlet 'dispatcherServlet'
+2023-01-27 12:08:03.915  === [http-nio-8080-exec-1] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Completed initialization in 1 ms
+2023-01-27 12:08:03.949  === [http-nio-8080-exec-1] === WARN  === o.s.w.s.m.support.DefaultHandlerExceptionResolver ===  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' not supported]
+2023-01-27 12:09:14.141  === [http-nio-8080-exec-6] === INFO  === PersonController ===  Person{firstName='John', lastName='HILALI', address='1509 Culver Street', city='Culver', zip='97451', phone='841-874-6512', email='jaboyd@email.com'} is updated !
+2023-01-27 12:09:27.138  === [http-nio-8080-exec-9] === INFO  === PersonController ===  Person{firstName='John', lastName='HILALI', address='1509 Culver Street', city='Culver', zip='97451', phone='841-874-6512', email='jaboyd@email.com'} is updated !
+2023-01-27 12:09:43.884  === [http-nio-8080-exec-10] === INFO  === PersonController ===  Person{firstName='John', lastName='HILALI', address='1509 Culver Street', city='Culver', zip='97451', phone='841-874-6512', email='jaboyd@email.com'} is updated !
+2023-01-27 12:10:06.487  === [http-nio-8080-exec-3] === WARN  === o.s.w.s.m.support.DefaultHandlerExceptionResolver ===  Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'PUT' not supported]
+2023-01-27 12:10:09.805  === [http-nio-8080-exec-4] === INFO  === PersonController ===  John Boydinformation
+2023-01-27 12:10:44.145  === [http-nio-8080-exec-7] === INFO  === MedicalRecordController ===  Children living in the1509 Culver St
+2023-01-27 12:11:24.568  === [http-nio-8080-exec-8] === INFO  === PersonController ===  City Culver is quiered to get all emails.
+2023-01-27 12:40:56.346  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 20044 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
+2023-01-27 12:40:56.350  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
+2023-01-27 12:40:57.149  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
+2023-01-27 12:40:57.157  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
+2023-01-27 12:40:57.157  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-01-27 12:40:57.241  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
+2023-01-27 12:40:57.241  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 846 ms
+2023-01-27 12:40:57.633  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-27 12:40:57.640  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.65 seconds (JVM running for 2.004)
+2023-01-27 13:04:20.934  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 7664 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
+2023-01-27 13:04:20.937  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
+2023-01-27 13:04:21.756  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
+2023-01-27 13:04:21.767  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
+2023-01-27 13:04:21.767  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-01-27 13:04:21.863  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
+2023-01-27 13:04:21.864  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 873 ms
+2023-01-27 13:04:22.261  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-27 13:04:22.270  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 1.707 seconds (JVM running for 2.062)
+2023-01-27 13:04:31.158  === [http-nio-8080-exec-2] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-27 13:04:31.158  === [http-nio-8080-exec-2] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Initializing Servlet 'dispatcherServlet'
+2023-01-27 13:04:31.158  === [http-nio-8080-exec-2] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Completed initialization in 0 ms
+2023-01-27 16:42:40.630  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Starting SafetynetAlertsApplication using Java 18.0.2.1 on LAPTOP-C8U76SD3 with PID 3700 (D:\OPC\Formation_Java\P5\SafetynetAlerts\SafetynetAlerts\target\classes started by hilal in D:\OPC\Formation_Java\P5\SafetynetAlerts)
+2023-01-27 16:42:40.633  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  No active profile set, falling back to 1 default profile: "default"
+2023-01-27 16:42:41.660  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat initialized with port(s): 8080 (http)
+2023-01-27 16:42:41.672  === [main] === INFO  === org.apache.catalina.core.StandardService ===  Starting service [Tomcat]
+2023-01-27 16:42:41.672  === [main] === INFO  === org.apache.catalina.core.StandardEngine ===  Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-01-27 16:42:41.789  === [main] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring embedded WebApplicationContext
+2023-01-27 16:42:41.789  === [main] === INFO  === o.s.b.w.s.c.ServletWebServerApplicationContext ===  Root WebApplicationContext: initialization completed in 1101 ms
+2023-01-27 16:42:42.221  === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ===  Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-27 16:42:42.231  === [main] === INFO  === c.s.SafetynetAlerts.SafetynetAlertsApplication ===  Started SafetynetAlertsApplication in 2.032 seconds (JVM running for 2.458)
+2023-01-27 16:42:59.918  === [http-nio-8080-exec-2] === INFO  === o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] ===  Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-01-27 16:42:59.919  === [http-nio-8080-exec-2] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Initializing Servlet 'dispatcherServlet'
+2023-01-27 16:42:59.920  === [http-nio-8080-exec-2] === INFO  === org.springframework.web.servlet.DispatcherServlet ===  Completed initialization in 1 ms

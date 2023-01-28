@@ -181,7 +181,7 @@ public class FireStationRepository {
         return dtoMap;
     }
 
-    //localhost:8080/flood:stations?stations=<a list of station_number>
+    //localhost:8080/flood/stations?stations=<a list of station_number>
     // This method a map of the persons and their medical records and addresses who are covered by a list of firestations
     public Map<String, Set<PersonWithMedicalRecord>> findAllPersonByStation(List<String> stationsNumber) throws ParseException {
         Map<String, Set<PersonWithMedicalRecord>> map;

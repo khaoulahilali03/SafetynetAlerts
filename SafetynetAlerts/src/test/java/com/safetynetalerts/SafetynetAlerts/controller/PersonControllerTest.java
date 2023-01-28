@@ -94,14 +94,14 @@ public class PersonControllerTest {
 
     @Test
     public void getAllEmailsByCityTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/communityemail?city=Culver"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/communityEmail?city=Culver"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()",is(23)));
     }
 
     @Test
     public void getPersonInfoTestForExistingName() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/personinfo?firstname=John&lastname=Boyd"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/personInfo?firstName=John&lastName=Boyd"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", is(7)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.address",is("1509 Culver Street")))
@@ -111,7 +111,7 @@ public class PersonControllerTest {
 
     @Test
     public void getPersonInfoTestForNoExistingName() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/personinfo?firstname=John&lastname=Boy"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/personInfo?firstName=John&lastName=Boy"))
                 .andExpect(status().isNotFound());
     }
 }

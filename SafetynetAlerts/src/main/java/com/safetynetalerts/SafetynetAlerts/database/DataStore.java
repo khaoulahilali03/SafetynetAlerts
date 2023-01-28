@@ -4,15 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynetalerts.SafetynetAlerts.model.FireStation;
 import com.safetynetalerts.SafetynetAlerts.model.MedicalRecord;
 import com.safetynetalerts.SafetynetAlerts.model.Person;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 @Component
 public class DataStore {
+
+    @Value("classpath:data.json")
+    Resource resource;
 
     private List<Person> persons= new ArrayList<>();
     private List<FireStation> firestations = new ArrayList<>();
@@ -48,9 +54,9 @@ public class DataStore {
 
     @PostConstruct
     public DataStore readObjectFromJsonFile() throws IOException {
-        String fileName = "D:/OPC/Formation_Java/P5/SafetynetAlerts/SafetynetAlerts/src/main/resources/data.json";
+        File file = resource.getFile();
         ObjectMapper mapper = new ObjectMapper();
-        DataStore store = mapper.readValue(Paths.get(fileName).toFile(), DataStore.class);
+        DataStore store = mapper.readValue(file,DataStore.class);
         persons = store.getPersons();
         firestations = store.getFirestations();
         medicalrecords = store.getMedicalrecords();

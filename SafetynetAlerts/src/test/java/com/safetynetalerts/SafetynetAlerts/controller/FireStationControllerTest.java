@@ -25,7 +25,7 @@ public class FireStationControllerTest {
 
     @Test
     public void getAllFireStationTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/firestation"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/firestations"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()",is(13)));
     }
@@ -33,7 +33,7 @@ public class FireStationControllerTest {
     @Test
     public void createFireStationTest() throws Exception {
         FireStation fireStation = new FireStation("22 rue pasteur", "5");
-        mockMvc.perform(MockMvcRequestBuilders.post("/firestation")
+        mockMvc.perform(MockMvcRequestBuilders.post("/firestations")
                 .content(objectMapper.writeValueAsString(fireStation))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -43,7 +43,7 @@ public class FireStationControllerTest {
     @Test
     public void createFireStationTest_withExistingFireStation() throws Exception {
         FireStation fireStation = new FireStation("1509 Culver St", "3");
-        mockMvc.perform(MockMvcRequestBuilders.post("/firestation")
+        mockMvc.perform(MockMvcRequestBuilders.post("/firestations")
                 .content(objectMapper.writeValueAsString(fireStation))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -53,7 +53,7 @@ public class FireStationControllerTest {
     @Test
     public void updateFireStationTest() throws Exception {
         FireStation fireStation = new FireStation("1509 Culver St", "2");
-        mockMvc.perform(MockMvcRequestBuilders.put("/firestation/1509 Culver St")
+        mockMvc.perform(MockMvcRequestBuilders.put("/firestations/1509 Culver St")
                 .content(objectMapper.writeValueAsString(fireStation))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -62,7 +62,7 @@ public class FireStationControllerTest {
     @Test
     public void updateFireStationTest_withNoExistingFireStation() throws Exception{
         FireStation fireStation = new FireStation("22 rue pasteur", "5");
-        mockMvc.perform(MockMvcRequestBuilders.put("/firestation/22 rue pasteur")
+        mockMvc.perform(MockMvcRequestBuilders.put("/firestations/22 rue pasteur")
                         .content(objectMapper.writeValueAsString(fireStation))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -71,7 +71,7 @@ public class FireStationControllerTest {
     @Test
     public void deleteFireStationTest() throws Exception {
         FireStation fireStation = new FireStation("1509 Culver St", "3");
-        mockMvc.perform(MockMvcRequestBuilders.delete("/firestation/1509 Culver St")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/firestations/1509 Culver St")
                 .content(objectMapper.writeValueAsString(fireStation))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -81,7 +81,7 @@ public class FireStationControllerTest {
     @Test
     public void deleteFireStationTest_withNoExistingFireStation() throws Exception{
         FireStation fireStation = new FireStation("22 rue pasteur", "5");
-        mockMvc.perform(MockMvcRequestBuilders.delete("/firestation/22 rue pasteur")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/firestations/22 rue pasteur")
                         .content(objectMapper.writeValueAsString(fireStation))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -90,7 +90,7 @@ public class FireStationControllerTest {
 
     @Test
     public void getPhoneNumberForAStationTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/phonealert?numberStation=1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/phoneAlert?firestation=1"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(4)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[2]").value("841-874-7462"));
@@ -98,7 +98,7 @@ public class FireStationControllerTest {
 
     @Test
     public void getPhoneNumberForAStationTest_withNoExistingNumberStation() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/phonealert?numberStation=19"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/phoneAlert?firestation=19"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.length()",is(0)));
     }
@@ -121,14 +121,14 @@ public class FireStationControllerTest {
 
     @Test
     public void findPersonsByStationNumberTest() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/firestationsn?numberStation=2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/firestation?stationNumber=2"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(3)));
     }
 
     @Test
     public void findPersonsByStationNUmberTest_withNoExistingNumberStation() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/firestationsn?numberStation=10"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/firestation?stationNumber=10"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.personSet.size()",is(0)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.adult_count").value("0"))
@@ -137,14 +137,14 @@ public class FireStationControllerTest {
 
     @Test
     public void findAllPersonByStationTest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/flood?stationsNumber=2,3"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/flood/stations?stations=2,3"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(7)));
     }
 
     @Test
     public void findAllPersonByStationTest_withNoExistingNumberStation() throws Exception{
-            mockMvc.perform(MockMvcRequestBuilders.get("/flood?stationsNumber=10,20"))
+            mockMvc.perform(MockMvcRequestBuilders.get("/flood/stations?stations=10,20"))
                     .andExpect(status().isOk())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.size()",is(0)));
     }
